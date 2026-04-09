@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en-US" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedro Lopes | Developer Portfolio</title>
+  <meta
+    name="description"
+    content="Pedro Lopes, Software Engineer at Six Creative. Full-stack product delivery across web, mobile, APIs, and system architecture."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      color-scheme: dark;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.4);
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg-0: #070c17;
+      --bg-1: #0d1428;
+      --panel: rgba(12, 21, 40, 0.9);
+      --panel-2: rgba(18, 31, 56, 0.92);
+      --line: #23365d;
+      --text: #e8f0ff;
+      --muted: #9eb0cf;
+      --accent: #66f5c4;
+      --accent-2: #86b8ff;
+      --chip: #172643;
+      --link: #9bc9ff;
+      --terminal-text: #b7ffd9;
+    }
+
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg-0: #f3f7ff;
+      --bg-1: #eaf0ff;
+      --panel: rgba(255, 255, 255, 0.95);
+      --panel-2: rgba(248, 251, 255, 0.96);
+      --line: #c4d0ea;
+      --text: #101a2f;
+      --muted: #4f5f7b;
+      --accent: #0f9d78;
+      --accent-2: #2455c5;
+      --chip: #e3ebfb;
+      --link: #1f4db5;
+      --terminal-text: #0f3f35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "JetBrains Mono", monospace;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% -10%, rgba(102, 245, 196, 0.18), transparent 34%),
+        radial-gradient(circle at 90% 0%, rgba(134, 184, 255, 0.16), transparent 32%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0));
+      min-height: 100vh;
+      transition: background 0.28s ease, color 0.28s ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.14;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at 50% 35%, black 40%, transparent 86%);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .layout {
+      width: min(1140px, 94vw);
+      margin: 0 auto;
+      padding: 1.1rem 0 2.4rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0.85rem;
+      z-index: 40;
+      padding: 0.9rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.38rem 0.75rem;
+      font-size: 0.79rem;
+      font-weight: 500;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.45rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-2);
+      color: #f6fbff;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.76rem;
+      padding: 0.44rem 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      padding: clamp(1.1rem, 2.6vw, 1.9rem);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-kicker {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .hero h1 {
+      margin-top: 0.55rem;
+      font-size: clamp(2.1rem, 5.4vw, 4.1rem);
+      line-height: 1.02;
+    }
+
+    .hero-role {
+      margin: 0.75rem 0 0;
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .hero-summary {
+      margin-top: 0.95rem;
+      color: var(--muted);
+      line-height: 1.66;
+      max-width: 66ch;
+      font-size: 0.93rem;
+    }
+
+    .cta-row {
+      margin-top: 1.05rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.55rem 0.82rem;
+      font-size: 0.79rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.36);
+      border: none;
+    }
+
+    .quick-grid {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .quick-card {
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .quick-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.24rem;
+      font-weight: 700;
+    }
+
+    .quick-value {
+      font-size: 0.8rem;
+      color: var(--text);
+      line-height: 1.42;
+      font-weight: 500;
+    }
+
+    .terminal {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--panel-2);
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .terminal-head {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.52rem 0.7rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-red {
+      background: #ff6e67;
+    }
+
+    .dot-yellow {
+      background: #ffd06c;
+    }
+
+    .dot-green {
+      background: #63f2b9;
+    }
+
+    .terminal pre {
+      margin: 0;
+      padding: 0.9rem;
+      color: var(--terminal-text);
+      font-size: 0.76rem;
+      line-height: 1.52;
+      white-space: pre-wrap;
+    }
+
+    .section {
+      margin-top: 1rem;
+      padding: clamp(1rem, 2.3vw, 1.6rem);
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.3rem, 3vw, 1.85rem);
+    }
+
+    .section-copy {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      max-width: 64ch;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .experience-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.95rem;
+    }
+
+    .experience-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .experience-top h3 {
+      font-size: 1.12rem;
+    }
+
+    .experience-role {
+      margin: 0.28rem 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .date-badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.34rem 0.66rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .experience-list {
+      margin: 0.85rem 0 0;
+      padding-left: 1.15rem;
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.88rem;
+    }
+
+    .experience-list li {
+      margin: 0.36rem 0;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .project-card {
+      grid-column: span 6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.34);
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-image.app-main {
+      background:
+        radial-gradient(circle at 28% 20%, rgba(134, 184, 255, 0.2), transparent 52%),
+        radial-gradient(circle at 74% 74%, rgba(102, 245, 196, 0.16), transparent 60%),
+        rgba(12, 21, 40, 0.72);
+      padding: 1rem;
+      width: calc(100% - 1.3rem);
+      margin: 0.65rem auto 0.45rem;
+      border: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .project-app-icon {
+      width: 230px;
+      height: 230px;
+      object-fit: contain;
+      display: block;
+      border-radius: 30px;
+    }
+
+    .project-image.app-main.is-fallback {
+      background: transparent;
+      padding: 0;
+    }
+
+    .project-image.app-main.is-fallback .project-app-icon {
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    :root[data-theme="light"] .project-image.app-main {
+      background:
+        radial-gradient(circle at 26% 18%, rgba(36, 85, 197, 0.12), transparent 52%),
+        radial-gradient(circle at 72% 72%, rgba(15, 157, 120, 0.12), transparent 60%),
+        #eef3ff;
+    }
+
+    :root[data-theme="light"] .project-image.app-main.is-fallback {
+      background: transparent;
+    }
+
+    .project-body {
+      padding: 0.84rem 0.9rem 0.95rem;
+    }
+
+    .project-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+
+    .project-head h3 {
+      font-size: 1.08rem;
+      margin: 0;
+    }
+
+    .project-type {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.66rem;
+      font-weight: 700;
+    }
+
+    .project-body p {
+      margin: 0.58rem 0;
+      color: var(--muted);
+      line-height: 1.57;
+      font-size: 0.84rem;
+      min-height: 5.1em;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .project-actions a {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .project-actions a:hover {
+      border-color: var(--accent);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.52rem;
+    }
+
+    .project-media-note {
+      margin: 0.66rem 0 0;
+      color: var(--muted);
+      font-size: 0.71rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .project-shot-strip {
+      margin-top: 0.52rem;
+      display: flex;
+      align-items: center;
+      gap: 0.56rem;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      padding: 0.12rem 0 0.4rem;
+    }
+
+    .project-shot-trigger {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.16rem;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      cursor: zoom-in;
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-shot-trigger:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .project-shot-trigger img {
+      width: auto;
+      height: auto;
+      max-height: 172px;
+      max-width: 260px;
+      object-fit: initial;
+      display: block;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(9, 15, 29, 0.92), rgba(15, 24, 45, 0.94));
+    }
+
+    :root[data-theme="light"] .project-shot-trigger img {
+      background: #eef3fd;
+    }
+
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(4, 8, 18, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .gallery-modal.open {
+      display: flex;
+    }
+
+    .gallery-modal-dialog {
+      width: min(1120px, 95vw);
+    }
+
+    .gallery-modal-stage {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel-2);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+      padding: 3.1rem 4rem 1rem;
+    }
+
+    .gallery-modal-frame {
+      min-height: min(72vh, 760px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-modal-image {
+      max-width: 100%;
+      max-height: min(72vh, 760px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(9, 15, 29, 0.92), rgba(15, 24, 45, 0.94));
+    }
+
+    :root[data-theme="light"] .gallery-modal-image {
+      background: #eef3fd;
+    }
+
+    .gallery-modal-close,
+    .gallery-modal-nav {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .gallery-modal-close:hover,
+    .gallery-modal-nav:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .gallery-modal-close {
+      position: absolute;
+      top: 0.72rem;
+      right: 0.72rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .gallery-modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .gallery-modal-nav.prev {
+      left: 0.84rem;
+    }
+
+    .gallery-modal-nav.next {
+      right: 0.84rem;
+    }
+
+    .gallery-modal-meta {
+      margin-top: 0.62rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .gallery-modal-caption,
+    .gallery-modal-counter {
+      margin: 0;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.19rem 0.5rem;
+      font-size: 0.67rem;
+      color: var(--muted);
+      background: var(--chip);
+      font-weight: 600;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.84rem 0.9rem;
+    }
+
+    .info-card h3 {
+      font-size: 0.95rem;
+      color: var(--accent-2);
+      margin-bottom: 0.62rem;
+    }
+
+    .info-card ul {
+      margin: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.58;
+    }
+
+    .info-card li {
+      margin: 0.32rem 0;
+    }
+
+    .contact {
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    .contact-links {
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .contact-links a {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.45rem 0.68rem;
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .contact-links a:hover {
+      border-color: var(--accent);
+    }
+
+    .footer-note {
+      margin-top: 0.8rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.7rem;
+      color: var(--muted);
+      font-size: 0.77rem;
+      line-height: 1.6;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.6s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.08s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.16s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.24s;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        grid-column: span 12;
+      }
+
+      .project-shot-trigger img {
+        max-height: 154px;
+        max-width: 230px;
+      }
+
+      .gallery-modal-stage {
+        padding: 2.9rem 3.1rem 0.9rem;
+      }
+
+      .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .layout {
+        width: min(1140px, 95vw);
+      }
+
+      .topbar {
+        top: 0.6rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-shot-trigger img {
+        max-height: 132px;
+        max-width: 196px;
+      }
+
+      .gallery-modal {
+        padding: 0.65rem;
+      }
+
+      .gallery-modal-stage {
+        padding: 2.85rem 0.8rem 0.9rem;
+      }
+
+      .gallery-modal-nav {
+        top: auto;
+        bottom: 0.78rem;
+        transform: none;
+        width: 40px;
+        height: 40px;
+      }
+
+      .gallery-modal-nav.prev {
+        left: 0.8rem;
+      }
+
+      .gallery-modal-nav.next {
+        right: 0.8rem;
+      }
+
+      .gallery-modal-meta {
+        padding: 0 2.9rem;
+      }
+
+      .gallery-modal-frame {
+        min-height: min(72vh, 620px);
+      }
+
+      .gallery-modal-image {
+        max-height: min(68vh, 560px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout" id="top">
+    <header class="topbar panel reveal">
+      <a href="#top" class="brand">pedro@portfolio:~$</a>
+
+      <nav class="nav-links">
+        <a href="#experience" data-i18n="navExperience">Experience</a>
+        <a href="#projects" data-i18n="navProjects">Projects</a>
+        <a href="#skills" data-i18n="navSkills">Skills</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="controls">
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn active" data-lang="en-us" type="button">EN-US</button>
+          <button class="lang-btn" data-lang="pt-br" type="button">PT-BR</button>
+        </div>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span data-i18n="modeLabel">Theme:</span>
+          <strong id="themeState">Dark</strong>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero panel reveal delay-1">
+        <article>
+          <p class="section-kicker" data-i18n="heroPrompt">$ engineer.profile --summary</p>
+          <h1>Pedro Lopes</h1>
+          <p class="hero-role" data-i18n="heroRole">
+            Software Engineer | Full-Stack Product Delivery | Partner at Six Creative
+          </p>
+          <p class="hero-summary" data-i18n="heroSummary">
+            Software Engineer with 7+ years delivering end-to-end software, from architecture and documentation to modern UI and production APIs. Built solutions for logistics, e-commerce, hospitality, media, and institutional clients.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:pedrolopesgrc@gmail.com" data-i18n="ctaEmail">Email</a>
+            <a class="btn" href="https://sixcreative.com.br/cases.php" target="_blank" rel="noreferrer" data-i18n="ctaCases">Company Cases</a>
+            <a class="btn" href="https://linkedin.com/in/pedro-lopes-324386161" target="_blank" rel="noreferrer" data-i18n="ctaLinkedin">LinkedIn</a>
+            <a class="btn" href="https://github.com/pedrolgarcia" target="_blank" rel="noreferrer" data-i18n="ctaGithub">GitHub</a>
+          </div>
+
+          <div class="quick-grid">
+            <article class="quick-card">
+              <div class="quick-label" data-i18n="quickLocationLabel">Location</div>
+              <div class="quick-value" data-i18n="quickLocationValue">Rio de Janeiro, RJ, Brazil</div>
+            </article>
+            <article class="quick-card">
+              <div class="quick-label" data-i18n="quickRoleLabel">Current Role</div>
+              <div class="quick-value" data-i18n="quickRoleValue">Software Engineer and Partner at Six Creative</div>
+            </article>
+            <article class="quick-card">
+              <div class="quick-label" data-i18n="quickFocusLabel">Focus</div>
+              <div class="quick-value" data-i18n="quickFocusValue">Web products, mobile apps, APIs, and management systems</div>
+            </article>
+            <article class="quick-card">
+              <div class="quick-label" data-i18n="quickStackLabel">Main Stack</div>
+              <div class="quick-value" data-i18n="quickStackValue">TypeScript, Python, Django, Next.js, React, React Native</div>
+            </article>
+          </div>
+        </article>
+
+        <aside class="terminal">
+          <header class="terminal-head">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span data-i18n="terminalTitle">project-context.json</span>
+          </header>
+          <pre id="terminalText">{}</pre>
+        </aside>
+      </section>
+
+      <section class="section panel reveal" id="experience">
+        <header class="section-head">
+          <div>
+            <p class="section-kicker" data-i18n="expKicker">// Experience</p>
+            <h2 data-i18n="expTitle">Professional Experience</h2>
+          </div>
+          <p class="section-copy" data-i18n="expLead">
+            Full ownership from technical documentation and UML diagrams to front-end implementation and documented API delivery.
+          </p>
+        </header>
+
+        <article class="experience-card">
+          <div class="experience-top">
+            <div>
+              <h3 data-i18n="expCompany">Six Creative</h3>
+              <p class="experience-role" data-i18n="expRole">Software Engineer | Partner</p>
+            </div>
+            <span class="date-badge" data-i18n="expDate">Jul 2018 - Present</span>
+          </div>
+          <ul class="experience-list">
+            <li data-i18n="expBullet1">Deliver complete solutions including websites, e-commerce, custom systems, dashboards, and mobile apps.</li>
+            <li data-i18n="expBullet2">Produce full technical documentation from memorials and proposals, including UML use cases and complete ERD models.</li>
+            <li data-i18n="expBullet3">Build modern interfaces from Figma using Next.js for web and React Native for mobile.</li>
+            <li data-i18n="expBullet4">Build documented RESTful APIs with Python and Django to power those interfaces and management systems.</li>
+            <li data-i18n="expBullet5">Maintain and evolve legacy systems for clients under support and maintenance contracts.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section panel reveal delay-1" id="projects">
+        <header class="section-head">
+          <div>
+            <p class="section-kicker" data-i18n="projectsKicker">// Selected Projects</p>
+            <h2 data-i18n="projectsTitle">Case Studies</h2>
+          </div>
+          <p class="section-copy" data-i18n="projectsLead">
+            Solutions built for logistics, e-commerce, sports, hospitality, media, and institutional operations.
+          </p>
+        </header>
+
+        <div class="project-grid">
+          <article class="project-card reveal delay-1">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/gofit-icon.png"
+                data-fallback="assets/images/gofit-shot-1.png"
+                alt="GOfit project preview"
+                data-i18n-alt="altGofit"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>GOfit</h3>
+                <span class="project-type" data-i18n="projectGofitType">Logistics and Mobility</span>
+              </div>
+              <p data-i18n="projectGofitDesc">
+                Brazil's first fuel delivery platform combining mobile order flow, operations management, and logistics control.
+              </p>
+              <div class="project-actions">
+                <a href="https://appgofit.com.br/" target="_blank" rel="noreferrer" data-i18n="linkWebsite">Website</a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.sixcreative.gofit&hl=pt"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkGooglePlay"
+                >Google Play</a>
+                <a
+                  href="https://apps.apple.com/br/app/gofit/id1470962843"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkAppStore"
+                >App Store</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="GOfit project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-1.png">
+                  <img src="assets/images/gofit-shot-1.png" alt="GOfit app shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-4.png">
+                  <img src="assets/images/gofit-shot-4.png" alt="GOfit app shot 4" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-5.png">
+                  <img src="assets/images/gofit-shot-5.png" alt="GOfit app shot 5" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-6.png">
+                  <img src="assets/images/gofit-shot-6.png" alt="GOfit app shot 6" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-7.png">
+                  <img src="assets/images/gofit-shot-7.png" alt="GOfit app shot 7" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-8.png">
+                  <img src="assets/images/gofit-shot-8.png" alt="GOfit app shot 8" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-9.png">
+                  <img src="assets/images/gofit-shot-9.png" alt="GOfit app shot 9" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-10.png">
+                  <img src="assets/images/gofit-shot-10.png" alt="GOfit app shot 10" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="gofit" data-full="assets/images/gofit-shot-11.png">
+                  <img src="assets/images/gofit-shot-11.png" alt="GOfit app shot 11" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">React Native</span>
+                <span class="tag">Django</span>
+                <span class="tag">Logistics</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/picpop-icon.png"
+                data-fallback="assets/images/picpop-shot-1.png"
+                alt="PicPop project preview"
+                data-i18n-alt="altPicpop"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>PicPop</h3>
+                <span class="project-type" data-i18n="projectPicpopType">Social Betting Platform</span>
+              </div>
+              <p data-i18n="projectPicpopDesc">
+                Built a full social betting ecosystem without real money: mobile app, website, and management dashboard with prediction communities and reward mechanics.
+              </p>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="PicPop project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-1.png">
+                  <img src="assets/images/picpop-shot-1.png" alt="PicPop shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-2.png">
+                  <img src="assets/images/picpop-shot-2.png" alt="PicPop shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-3.png">
+                  <img src="assets/images/picpop-shot-3.png" alt="PicPop shot 3" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-4.png">
+                  <img src="assets/images/picpop-shot-4.png" alt="PicPop shot 4" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-5.png">
+                  <img src="assets/images/picpop-shot-5.png" alt="PicPop shot 5" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-6.png">
+                  <img src="assets/images/picpop-shot-6.png" alt="PicPop shot 6" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="picpop" data-full="assets/images/picpop-shot-7.png">
+                  <img src="assets/images/picpop-shot-7.png" alt="PicPop shot 7" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">React Native</span>
+                <span class="tag">Next.js</span>
+                <span class="tag">Python</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/wine-icon.png"
+                data-fallback="assets/images/wine-shot-1.png"
+                alt="Wine66 project preview"
+                data-i18n-alt="altWine66"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>Wine66</h3>
+                <span class="project-type" data-i18n="projectWine66Type">E-Commerce</span>
+              </div>
+              <p data-i18n="projectWine66Desc">
+                Full wine e-commerce experience with curated labels, storytelling, and multi-channel product discovery.
+              </p>
+              <div class="project-actions">
+                <a href="https://wine66.com.br/" target="_blank" rel="noreferrer" data-i18n="linkWebsite">Website</a>
+                <a
+                  href="https://apps.apple.com/us/app/wine66/id6478689281"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkAppStore"
+                >App Store</a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.wine66&hl=pt"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkGooglePlay"
+                >Google Play</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="Wine66 project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-3.png">
+                  <img src="assets/images/wine-shot-3.png" alt="Wine66 app shot 3" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-4.png">
+                  <img src="assets/images/wine-shot-4.png" alt="Wine66 app shot 4" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-5.png">
+                  <img src="assets/images/wine-shot-5.png" alt="Wine66 app shot 5" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-6.png">
+                  <img src="assets/images/wine-shot-6.png" alt="Wine66 app shot 6" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-7.png">
+                  <img src="assets/images/wine-shot-7.png" alt="Wine66 app shot 7" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-0.png">
+                  <img src="assets/images/wine-shot-0.png" alt="Wine66 app shot 0" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-1.png">
+                  <img src="assets/images/wine-shot-1.png" alt="Wine66 app shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="wine66" data-full="assets/images/wine-shot-2.png">
+                  <img src="assets/images/wine-shot-2.png" alt="Wine66 app shot 2" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Next.js</span>
+                <span class="tag">Django</span>
+                <span class="tag">E-Commerce</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-3">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/cdpp-icon.png"
+                data-fallback="assets/images/cdpp-shot-4.png"
+                alt="CDPP project preview"
+                data-i18n-alt="altCdpp"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>CDPP</h3>
+                <span class="project-type" data-i18n="projectCdppType">Public Policy Think Tank</span>
+              </div>
+              <p data-i18n="projectCdppDesc">
+                Delivered an institutional website and event management system with QR-code guest control for one of Brazil's leading public policy debate centers.
+              </p>
+              <div class="project-actions">
+                <a href="https://cdpp.org.br/" target="_blank" rel="noreferrer" data-i18n="linkWebsite">Website</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="CDPP project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-4.png">
+                  <img src="assets/images/cdpp-shot-4.png" alt="CDPP shot 4" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-5.png">
+                  <img src="assets/images/cdpp-shot-5.png" alt="CDPP shot 5" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-6.png">
+                  <img src="assets/images/cdpp-shot-6.png" alt="CDPP shot 6" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-7.png">
+                  <img src="assets/images/cdpp-shot-7.png" alt="CDPP shot 7" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-0.png">
+                  <img src="assets/images/cdpp-shot-0.png" alt="CDPP shot 0" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-1.png">
+                  <img src="assets/images/cdpp-shot-1.png" alt="CDPP shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-2.png">
+                  <img src="assets/images/cdpp-shot-2.png" alt="CDPP shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="cdpp" data-full="assets/images/cdpp-shot-3.png">
+                  <img src="assets/images/cdpp-shot-3.png" alt="CDPP shot 3" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Next.js</span>
+                <span class="tag">Python</span>
+                <span class="tag">QR Code</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/sa-icon.png"
+                data-fallback="assets/images/sa-shot-1.png"
+                alt="Super Afiliados project preview"
+                data-i18n-alt="altSuperAfiliados"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>Super Afiliados</h3>
+                <span class="project-type" data-i18n="projectSuperType">Affiliate Management Platform</span>
+              </div>
+              <p data-i18n="projectSuperDesc">
+                Built a complete platform for one of Brazil's largest iGaming affiliate operations: mobile app with real-time KPIs, link distribution, push notifications, and integrated web admin.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.sixcreative.superafiliadosapp&hl=pt"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkGooglePlay"
+                >Google Play</a>
+                <a
+                  href="https://apps.apple.com/br/app/super-afiliados/id6449441413"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkAppStore"
+                >App Store</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="Super Afiliados project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-5.jpg">
+                  <img src="assets/images/sa-shot-5.jpg" alt="Super Afiliados shot 5" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-4.png">
+                  <img src="assets/images/sa-shot-4.png" alt="Super Afiliados shot 4" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-1.png">
+                  <img src="assets/images/sa-shot-1.png" alt="Super Afiliados shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-2.png">
+                  <img src="assets/images/sa-shot-2.png" alt="Super Afiliados shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-3.png">
+                  <img src="assets/images/sa-shot-3.png" alt="Super Afiliados shot 3" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-8.jpg">
+                  <img src="assets/images/sa-shot-8.jpg" alt="Super Afiliados shot 8" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="superafiliados" data-full="assets/images/sa-shot-7.jpg">
+                  <img src="assets/images/sa-shot-7.jpg" alt="Super Afiliados shot 7" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">React Native</span>
+                <span class="tag">Next.js</span>
+                <span class="tag">Python</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/record-icon.png"
+                data-fallback="assets/images/record-shot-1.png"
+                alt="Record TV project preview"
+                data-i18n-alt="altRecord"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>Record TV</h3>
+                <span class="project-type" data-i18n="projectRecordType">Sales Analytics</span>
+              </div>
+              <p data-i18n="projectRecordDesc">
+                Live sales monitoring system with executive reporting for customers, agencies, account executives, and revenue operations.
+              </p>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="Record TV project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="record" data-full="assets/images/record-shot-1.png">
+                  <img src="assets/images/record-shot-1.png" alt="Record TV shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="record" data-full="assets/images/record-shot-2.gif">
+                  <img src="assets/images/record-shot-2.gif" alt="Record TV shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="record" data-full="assets/images/record-shot-3.jpg">
+                  <img src="assets/images/record-shot-3.jpg" alt="Record TV shot 3" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Dashboard</span>
+                <span class="tag">BI</span>
+                <span class="tag">Live Data</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/clube-icon.png"
+                data-fallback="assets/images/clube-shot-1.png"
+                alt="Clube Mercosul project preview"
+                data-i18n-alt="altMercosul"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>Clube Mercosul</h3>
+                <span class="project-type" data-i18n="projectMercosulType">Benefits Platform</span>
+              </div>
+              <p data-i18n="projectMercosulDesc">
+                Platform focused on health, safety, well-being, and development opportunities for cargo drivers and families.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.clubemercosul&hl=pt_BR"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkGooglePlay"
+                >Google Play</a>
+                <a
+                  href="https://apps.apple.com/br/app/clube-mercosul/id6670620721"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkAppStore"
+                >App Store</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="Clube Mercosul project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="clube" data-full="assets/images/clube-shot-1.png">
+                  <img src="assets/images/clube-shot-1.png" alt="Clube Mercosul app shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="clube" data-full="assets/images/clube-shot-2.png">
+                  <img src="assets/images/clube-shot-2.png" alt="Clube Mercosul app shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="clube" data-full="assets/images/clube-shot-3.png">
+                  <img src="assets/images/clube-shot-3.png" alt="Clube Mercosul app shot 3" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="clube" data-full="assets/images/clube-shot-4.png">
+                  <img src="assets/images/clube-shot-4.png" alt="Clube Mercosul app shot 4" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Mobile</span>
+                <span class="tag">Benefits</span>
+                <span class="tag">Mercosur</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/windsor-icon.png"
+                data-fallback="assets/images/windsor-shot-1.jpg"
+                alt="Windsor Hotels project preview"
+                data-i18n-alt="altWindsor"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>Windsor Hotels</h3>
+                <span class="project-type" data-i18n="projectWindsorType">Hospitality Payments</span>
+              </div>
+              <p data-i18n="projectWindsorDesc">
+                Secure online reservation payment flow built for one of Brazil's most traditional luxury hotel networks.
+              </p>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="Windsor project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="windsor" data-full="assets/images/windsor-shot-1.jpg">
+                  <img src="assets/images/windsor-shot-1.jpg" alt="Windsor shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="windsor" data-full="assets/images/windsor-shot-2.jpg">
+                  <img src="assets/images/windsor-shot-2.jpg" alt="Windsor shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="windsor" data-full="assets/images/windsor-shot-3.jpg">
+                  <img src="assets/images/windsor-shot-3.jpg" alt="Windsor shot 3" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="windsor" data-full="assets/images/windsor-shot-4.jpg">
+                  <img src="assets/images/windsor-shot-4.jpg" alt="Windsor shot 4" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Security</span>
+                <span class="tag">Payments</span>
+                <span class="tag">Hospitality</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-image app-main">
+              <img
+                class="project-app-icon"
+                src="assets/images/tecsports-icon.png"
+                data-fallback="assets/images/tecsports-shot-3.png"
+                alt="TecSports project preview"
+                data-i18n-alt="altTecsports"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-head">
+                <h3>TecSports</h3>
+                <span class="project-type" data-i18n="projectTecsportsType">Sports Platform</span>
+              </div>
+              <p data-i18n="projectTecsportsDesc">
+                Platform that connects students, parents, and coaches with test results and progress tracking across schools in Brazil.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://apps.apple.com/br/app/tec-sports-app/id1544853756"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="linkAppStore"
+                >App Store</a>
+              </div>
+              <p class="project-media-note" data-i18n="projectShotsLabel">Project shots (click to enlarge)</p>
+              <div class="project-shot-strip" aria-label="TecSports project shots">
+                <button class="project-shot-trigger" type="button" data-gallery="tecsports" data-full="assets/images/tecsports-shot-1.png">
+                  <img src="assets/images/tecsports-shot-1.png" alt="TecSports app shot 1" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="tecsports" data-full="assets/images/tecsports-shot-2.png">
+                  <img src="assets/images/tecsports-shot-2.png" alt="TecSports app shot 2" loading="lazy" />
+                </button>
+                <button class="project-shot-trigger" type="button" data-gallery="tecsports" data-full="assets/images/tecsports-shot-3.png">
+                  <img src="assets/images/tecsports-shot-3.png" alt="TecSports app shot 3" loading="lazy" />
+                </button>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Mobile</span>
+                <span class="tag">Education</span>
+                <span class="tag">Gamification</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel reveal delay-2" id="skills">
+        <header class="section-head">
+          <div>
+            <p class="section-kicker" data-i18n="skillsKicker">// Skills and Education</p>
+            <h2 data-i18n="skillsTitle">Technical Skills, Education and Certifications</h2>
+          </div>
+          <p class="section-copy" data-i18n="skillsLead">
+            Strong execution across product development lifecycle, architecture documentation, and scalable implementation.
+          </p>
+        </header>
+
+        <div class="info-grid">
+          <article class="info-card">
+            <h3 data-i18n="coreTitle">Core Technologies</h3>
+            <ul>
+              <li data-i18n="core1">TypeScript, Python, JavaScript</li>
+              <li data-i18n="core2">React, Next.js, React Native</li>
+              <li data-i18n="core3">Node.js, NestJS and Django</li>
+              <li data-i18n="core4">RESTful API design and integration</li>
+              <li data-i18n="core4_1">DDD and Clean Architecture</li>
+              <li data-i18n="core5">Web and mobile product implementation</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h3 data-i18n="archTitle">Architecture and Process</h3>
+            <ul>
+              <li data-i18n="arch1">Modeling with use cases and complete ERD</li>
+              <li data-i18n="arch2">Technical documentation from memorials and proposals</li>
+              <li data-i18n="arch3">Front-end and back-end integration</li>
+              <li data-i18n="arch4">Legacy maintenance and continuous improvements</li>
+              <li data-i18n="arch5">AI-assisted development with GPT Code and Claude Code</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h3 data-i18n="eduTitle">Education and Certifications</h3>
+            <ul>
+              <li data-i18n="edu1">FAETERJ - Technology Degree in Systems Analysis and Development (2016-2019)</li>
+              <li data-i18n="edu2">Grupo Educacional Lemos de Castro - Technical Degree in Informatics (2013-2015)</li>
+              <li data-i18n="edu4">Social Entrepreneurship Course - Student United Way mentorship in partnership with PwC (2014)</li>
+              <li data-i18n="edu5">Node.js, React, Next.js, React Native and Microsservices Certifications - Rocketseat</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <footer class="contact panel reveal delay-3" id="contact">
+        <p class="section-kicker" data-i18n="contactKicker">// Contact</p>
+        <h2 data-i18n="contactTitle">Open for global product engineering opportunities</h2>
+        <p class="section-copy" data-i18n="contactSummary">
+          If you are hiring for full-stack software engineering, web/mobile product delivery, or API architecture, let's talk.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:pedrolopesgrc@gmail.com"><span data-i18n="contactEmailLabel">Email</span>: pedrolopesgrc@gmail.com</a>
+          <a href="https://linkedin.com/in/pedro-lopes-324386161" target="_blank" rel="noreferrer"><span data-i18n="contactLinkedinLabel">LinkedIn</span></a>
+          <a href="https://github.com/pedrolgarcia" target="_blank" rel="noreferrer"><span data-i18n="contactGithubLabel">GitHub</span></a>
+        </div>
+
+        <div class="footer-note">
+          <span data-i18n="footerLine1">Built and maintained at</span>
+          <a href="https://sixcreative.com.br" target="_blank" rel="noreferrer">Six Creative</a>.
+          <span data-i18n="footerLine2">All rights reserved.</span>
+          <span>© <span id="year"></span> Pedro Lopes</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="gallery-modal" id="galleryModal" aria-hidden="true">
+    <div class="gallery-modal-dialog">
+      <div class="gallery-modal-stage">
+        <button id="galleryClose" class="gallery-modal-close" type="button" aria-label="Close image viewer">&times;</button>
+        <button id="galleryPrev" class="gallery-modal-nav prev" type="button" aria-label="Previous shot">&#8249;</button>
+        <button id="galleryNext" class="gallery-modal-nav next" type="button" aria-label="Next shot">&#8250;</button>
+        <div class="gallery-modal-frame">
+          <img id="galleryImage" class="gallery-modal-image" src="" alt="" loading="eager" />
+        </div>
+        <div class="gallery-modal-meta">
+          <p class="gallery-modal-caption" id="galleryCaption"></p>
+          <p class="gallery-modal-counter" id="galleryCounter"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      "en-us": {
+        modeLabel: "Theme:",
+        modeDark: "Dark",
+        modeLight: "Light",
+        navExperience: "Experience",
+        navProjects: "Projects",
+        navSkills: "Skills",
+        navContact: "Contact",
+        heroPrompt: "$ engineer.profile --summary",
+        heroRole: "Software Engineer | Full-Stack Product Delivery | Partner at Six Creative",
+        heroSummary:
+          "Software Engineer with 7+ years delivering end-to-end software, from architecture and documentation to modern UI and production APIs. Built solutions for logistics, e-commerce, hospitality, media, and institutional clients.",
+        ctaEmail: "Email",
+        ctaCases: "Company Cases",
+        ctaLinkedin: "LinkedIn",
+        ctaGithub: "GitHub",
+        quickLocationLabel: "Location",
+        quickLocationValue: "Rio de Janeiro, RJ, Brazil",
+        quickRoleLabel: "Current Role",
+        quickRoleValue: "Software Engineer and Partner at Six Creative",
+        quickFocusLabel: "Focus",
+        quickFocusValue: "Web products, mobile apps, APIs, and management systems",
+        quickStackLabel: "Main Stack",
+        quickStackValue: "TypeScript, Python, Django, Next.js, React, React Native",
+        terminalTitle: "project-context.json",
+        terminalContent:
+          "{\n" +
+          "  \"name\": \"Pedro Lopes\",\n" +
+          "  \"career_path\": \"intern -> contractor -> partner\",\n" +
+          "  \"current_company\": \"Six Creative\",\n" +
+          "  \"delivery_scope\": [\"web\", \"mobile\", \"api\", \"system design\"],\n" +
+          "  \"tooling\": [\"TypeScript\", \"Python\", \"Django\", \"Next.js\", \"React Native\"],\n" +
+          "  \"status\": \"open to global opportunities\"\n" +
+          "}",
+        expKicker: "// Experience",
+        expTitle: "Professional Experience",
+        expLead:
+          "Full ownership from technical documentation and UML diagrams to front-end implementation and documented API delivery.",
+        expCompany: "Six Creative",
+        expRole: "Software Engineer | Partner",
+        expDate: "Jul 2018 - Present",
+        expBullet1:
+          "Deliver complete solutions including websites, e-commerce, custom systems, dashboards, and mobile apps.",
+        expBullet2:
+          "Produce full technical documentation from memorials and proposals, including UML use cases and complete ERD models.",
+        expBullet3:
+          "Build modern interfaces from Figma using Next.js for web and React Native for mobile.",
+        expBullet4:
+          "Build documented RESTful APIs with Python and Django to power those interfaces and management systems.",
+        expBullet5:
+          "Maintain and evolve legacy systems for clients under support and maintenance contracts.",
+        projectsKicker: "// Selected Projects",
+        projectsTitle: "Case Studies",
+        projectsLead:
+          "Solutions built for logistics, e-commerce, sports, hospitality, media, and institutional operations.",
+        projectGofitType: "Logistics and Mobility",
+        projectGofitDesc:
+          "Brazil's first fuel delivery platform combining mobile order flow, operations management, and logistics control.",
+        projectTecsportsType: "Sports Platform",
+        projectTecsportsDesc:
+          "Platform that connects students, parents, and coaches with test results and progress tracking across schools in Brazil.",
+        projectWine66Type: "E-Commerce",
+        projectWine66Desc:
+          "Full wine e-commerce experience with curated labels, storytelling, and multi-channel product discovery.",
+        projectMercosulType: "Benefits Platform",
+        projectMercosulDesc:
+          "Platform focused on health, safety, well-being, and development opportunities for cargo drivers and families.",
+        projectCdppType: "Public Policy Think Tank",
+        projectCdppDesc:
+          "Delivered an institutional website and event management system with QR-code guest control for one of Brazil's leading public policy debate centers.",
+        projectPicpopType: "Social Betting Platform",
+        projectPicpopDesc:
+          "Built a full social betting ecosystem without real money: mobile app, website, and management dashboard with prediction communities and reward mechanics.",
+        projectSuperType: "Affiliate Management Platform",
+        projectSuperDesc:
+          "Built a complete platform for one of Brazil's largest iGaming affiliate operations: mobile app with real-time KPIs, link distribution, push notifications, and integrated web admin.",
+        projectWindsorType: "Hospitality Payments",
+        projectWindsorDesc:
+          "Secure online reservation payment flow built for one of Brazil's most traditional luxury hotel networks.",
+        projectRecordType: "Sales Analytics",
+        projectRecordDesc:
+          "Live sales monitoring system with executive reporting for customers, agencies, account executives, and revenue operations.",
+        linkWebsite: "Website",
+        linkGooglePlay: "Google Play",
+        linkAppStore: "App Store",
+        linkAbout: "About",
+        projectShotsLabel: "Project shots (click to enlarge)",
+        skillsKicker: "// Skills and Education",
+        skillsTitle: "Technical Skills, Education and Certifications",
+        skillsLead:
+          "Strong execution across product development lifecycle, architecture documentation, and scalable implementation.",
+        coreTitle: "Core Technologies",
+        core1: "TypeScript, Python, JavaScript",
+        core2: "React, Next.js, React Native",
+        core3: "Node.js, NestJS and Django",
+        core4: "RESTful API design and integration",
+        core4_1: "DDD and Clean Architecture",
+        core5: "Web and mobile product implementation",
+        archTitle: "Architecture and Process",
+        arch1: "Modeling with use cases and complete ERD",
+        arch2: "Technical documentation from memorials and proposals",
+        arch3: "Front-end and back-end integration",
+        arch4: "Legacy maintenance and continuous improvements",
+        arch5: "AI-assisted development with GPT Code and Claude Code",
+        eduTitle: "Education and Certifications",
+        edu1: "FAETERJ - Technology Degree in Systems Analysis and Development (2016-2019)",
+        edu2: "Grupo Educacional Lemos de Castro - Technical Degree in Informatics (2013-2015)",
+        edu4: "Social Entrepreneurship Course - Student United Way mentorship in partnership with PwC (2014)",
+        edu5: "Node.js, React, Next.js, React Native and Microsservices Certifications - Rocketseat",
+        contactKicker: "// Contact",
+        contactTitle: "Open for global product engineering opportunities",
+        contactSummary:
+          "If you are hiring for full-stack software engineering, web/mobile product delivery, or API architecture, let's talk.",
+        contactEmailLabel: "Email",
+        contactLinkedinLabel: "LinkedIn",
+        contactGithubLabel: "GitHub",
+        footerLine1: "Built and maintained at",
+        footerLine2: "All rights reserved.",
+        altGofit: "GOfit project preview",
+        altTecsports: "TecSports project preview",
+        altWine66: "Wine66 project preview",
+        altMercosul: "Clube Mercosul project preview",
+        altCdpp: "CDPP project preview",
+        altPicpop: "PicPop project preview",
+        altSuperAfiliados: "Super Afiliados project preview",
+        altWindsor: "Windsor Hotels project preview",
+        altRecord: "Record TV project preview"
+      },
+      "pt-br": {
+        modeLabel: "Tema:",
+        modeDark: "Escuro",
+        modeLight: "Claro",
+        navExperience: "Experiência",
+        navProjects: "Projetos",
+        navSkills: "Habilidades",
+        navContact: "Contato",
+        heroPrompt: "$ engineer.profile --resumo",
+        heroRole: "Engenheiro de Software | Entrega Full-Stack | Sócio na Six Creative",
+        heroSummary:
+          "Engenheiro de Software com 7+ anos entregando software ponta a ponta, da arquitetura e documentação técnica até interfaces modernas e APIs em produção. Atuação em produtos para logística, e-commerce, hotelaria, mídia e clientes institucionais.",
+        ctaEmail: "Email",
+        ctaCases: "Cases da Empresa",
+        ctaLinkedin: "LinkedIn",
+        ctaGithub: "GitHub",
+        quickLocationLabel: "Localização",
+        quickLocationValue: "Rio de Janeiro, RJ, Brasil",
+        quickRoleLabel: "Cargo Atual",
+        quickRoleValue: "Engenheiro de Software e Sócio na Six Creative",
+        quickFocusLabel: "Foco",
+        quickFocusValue: "Produtos web, apps mobile, APIs e sistemas de gestão",
+        quickStackLabel: "Stack Principal",
+        quickStackValue: "TypeScript, Python, Django, Next.js, React, React Native",
+        terminalTitle: "contexto-projeto.json",
+        terminalContent:
+          "{\n" +
+          "  \"nome\": \"Pedro Lopes\",\n" +
+          "  \"trajetória\": \"estágio -> prestador -> sócio\",\n" +
+          "  \"empresa_atual\": \"Six Creative\",\n" +
+          "  \"escopo_entrega\": [\"web\", \"mobile\", \"api\", \"arquitetura\"],\n" +
+          "  \"ferramentas\": [\"TypeScript\", \"Python\", \"Django\", \"Next.js\", \"React Native\"],\n" +
+          "  \"status\": \"aberto a oportunidades globais\"\n" +
+          "}",
+        expKicker: "// Experiência",
+        expTitle: "Experiência Profissional",
+        expLead:
+          "Atuação completa da documentação técnica e modelagem UML até implementação front-end e entrega de APIs documentadas.",
+        expCompany: "Six Creative",
+        expRole: "Engenheiro de Software | Sócio",
+        expDate: "Jul 2018 - Atual",
+        expBullet1:
+          "Entrego soluções completas incluindo websites, e-commerce, sistemas personalizados, painéis de gestão e aplicativos mobile.",
+        expBullet2:
+          "Produzo documentação técnica completa a partir de memoriais e propostas, com diagramas UML de caso de uso e DER completo.",
+        expBullet3:
+          "Construo interfaces modernas a partir do Figma usando Next.js para web e React Native para mobile.",
+        expBullet4:
+          "Desenvolvo APIs RESTful documentadas com Python e Django para alimentar interfaces e painéis de gestão.",
+        expBullet5:
+          "Realizo manutenção, melhorias e evolução de sistemas legados de clientes com contrato de suporte.",
+        projectsKicker: "// Projetos Selecionados",
+        projectsTitle: "Cases",
+        projectsLead:
+          "Soluções construídas para logística, e-commerce, esporte, hotelaria, mídia e operações institucionais.",
+        projectGofitType: "Logística e Mobilidade",
+        projectGofitDesc:
+          "Primeira plataforma de delivery de combustível do Brasil, unindo fluxo mobile de pedidos, gestão operacional e controle logístico.",
+        projectTecsportsType: "Plataforma Esportiva",
+        projectTecsportsDesc:
+          "Plataforma que conecta alunos, pais e professores com testes e acompanhamento de desempenho em escolinhas no Brasil.",
+        projectWine66Type: "E-Commerce",
+        projectWine66Desc:
+          "Experiência completa de e-commerce de vinhos com curadoria de rótulos, storytelling e descoberta de produtos em múltiplos canais.",
+        projectMercosulType: "Plataforma de Benefícios",
+        projectMercosulDesc:
+          "Plataforma focada em saúde, segurança, bem-estar e desenvolvimento para motoristas de carga e seus familiares.",
+        projectCdppType: "Think Tank de Políticas Públicas",
+        projectCdppDesc:
+          "Entreguei site institucional e sistema de gestão de eventos com controle de convidados por QR Code para um dos principais centros de debate de políticas públicas do Brasil.",
+        projectPicpopType: "Plataforma de Apostas Sociais",
+        projectPicpopDesc:
+          "Desenvolvi ecossistema completo de apostas sociais sem dinheiro real: app mobile, website e painel de gestão. Usuários competem em previsões esportivas, acumulam pontos e trocam por prêmios dentro de comunidades criadas por influenciadores digitais.",
+        projectSuperType: "Plataforma de Gestão de Afiliados",
+        projectSuperDesc:
+          "Construí plataforma completa para a maior empresa de afiliação de iGaming do Brasil: app mobile com acompanhamento de KPIs em tempo real, disparo de links, push notifications e painel administrativo web com integração automática de dados por operadora.",
+        projectWindsorType: "Pagamentos para Hotelaria",
+        projectWindsorDesc:
+          "Fluxo seguro de pagamento online para reservas, desenvolvido para uma das redes de hotéis de luxo mais tradicionais do Brasil.",
+        projectRecordType: "Análise Comercial",
+        projectRecordDesc:
+          "Sistema live de acompanhamento de vendas com relatórios executivos para clientes, agências, executivos de conta e faturamento.",
+        linkWebsite: "Site",
+        linkGooglePlay: "Google Play",
+        linkAppStore: "App Store",
+        linkAbout: "Sobre",
+        projectShotsLabel: "Shots do projeto (clique para ampliar)",
+        skillsKicker: "// Skills e Formação",
+        skillsTitle: "Habilidades Técnicas, Formação e Certificações",
+        skillsLead:
+          "Execução forte em todo ciclo de desenvolvimento, com foco em arquitetura, documentação e implementação escalável.",
+        coreTitle: "Tecnologias Principais",
+        core1: "TypeScript, Python, JavaScript",
+        core2: "React, Next.js, React Native",
+        core3: "Node.js, NestJS e Django",
+        core4: "Design e integração de APIs RESTful",
+        core4_1: "DDD e Clean Architecture",
+        core5: "Implementação de produtos web e mobile",
+        archTitle: "Arquitetura e Processo",
+        arch1: "Modelagem com casos de uso e DER completo",
+        arch2: "Documentação técnica baseada em memoriais e propostas",
+        arch3: "Integração entre front-end e back-end",
+        arch4: "Manutenção de legado e melhorias contínuas",
+        arch5: "Desenvolvimento assistido por IA com GPT Code e Claude Code",
+        eduTitle: "Formação e Certificações",
+        edu1: "FAETERJ - Tecnólogo em Análise e Desenvolvimento de Sistemas (2016-2019)",
+        edu2: "Grupo Educacional Lemos de Castro - Técnico em Informática (2013-2015)",
+        edu4: "Curso de Empreendedorismo Social - Mentoria Student United Way em parceria com a PwC (2014)",
+        edu5: "Formações Node.js, React, Next.js e React Native - Rocketseat",
+        contactKicker: "// Contato",
+        contactTitle: "Disponível para oportunidades globais em engenharia de produto",
+        contactSummary:
+          "Se você está contratando para engenharia full-stack, entrega de produto web/mobile ou arquitetura de APIs, vamos conversar.",
+        contactEmailLabel: "Email",
+        contactLinkedinLabel: "LinkedIn",
+        contactGithubLabel: "GitHub",
+        footerLine1: "Construído e mantido na",
+        footerLine2: "Todos os direitos reservados.",
+        altGofit: "Prévia do projeto GOfit",
+        altTecsports: "Prévia do projeto TecSports",
+        altWine66: "Prévia do projeto Wine66",
+        altMercosul: "Prévia do projeto Clube Mercosul",
+        altCdpp: "Prévia do projeto CDPP",
+        altPicpop: "Prévia do projeto PicPop",
+        altSuperAfiliados: "Prévia do projeto Super Afiliados",
+        altWindsor: "Prévia do projeto Windsor Hotels",
+        altRecord: "Prévia do projeto Record TV"
+      }
+    };
+
+    const THEME_KEY = "pedro-portfolio-theme";
+    const LANG_KEY = "pedro-portfolio-lang";
+
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("themeToggle");
+    const themeState = document.getElementById("themeState");
+    const terminalText = document.getElementById("terminalText");
+    const yearElement = document.getElementById("year");
+    const languageButtons = Array.from(document.querySelectorAll(".lang-btn"));
+    const galleryModal = document.getElementById("galleryModal");
+    const galleryImage = document.getElementById("galleryImage");
+    const galleryCaption = document.getElementById("galleryCaption");
+    const galleryCounter = document.getElementById("galleryCounter");
+    const galleryClose = document.getElementById("galleryClose");
+    const galleryPrev = document.getElementById("galleryPrev");
+    const galleryNext = document.getElementById("galleryNext");
+
+    let currentLang = "en-us";
+
+    function updateThemeLabel() {
+      const dict = translations[currentLang] || translations["en-us"];
+      const isDark = root.getAttribute("data-theme") === "dark";
+      themeState.textContent = isDark ? dict.modeDark : dict.modeLight;
+      themeToggle.setAttribute("aria-label", (dict.modeLabel + " " + themeState.textContent).trim());
+    }
+
+    function updateLanguageButtons() {
+      languageButtons.forEach((button) => {
+        const active = button.dataset.lang === currentLang;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+    }
+
+    function applyTranslations(lang) {
+      currentLang = translations[lang] ? lang : "en-us";
+      const dict = translations[currentLang];
+
+      document.documentElement.lang = currentLang === "pt-br" ? "pt-BR" : "en-US";
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        const value = dict[key];
+        if (typeof value === "string") {
+          element.textContent = value;
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+        const key = element.getAttribute("data-i18n-alt");
+        const value = dict[key];
+        if (typeof value === "string") {
+          element.setAttribute("alt", value);
+        }
+      });
+
+      if (typeof dict.terminalContent === "string") {
+        terminalText.textContent = dict.terminalContent;
+      }
+
+      updateThemeLabel();
+      updateLanguageButtons();
+      localStorage.setItem(LANG_KEY, currentLang);
+    }
+
+    function setTheme(theme) {
+      const nextTheme = theme === "light" ? "light" : "dark";
+      root.setAttribute("data-theme", nextTheme);
+      updateThemeLabel();
+      localStorage.setItem(THEME_KEY, nextTheme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      setTheme(next);
+    });
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        applyTranslations(button.dataset.lang || "en-us");
+      });
+    });
+
+    document.querySelectorAll("img[data-fallback]").forEach((image) => {
+      image.addEventListener("error", () => {
+        const fallback = image.dataset.fallback;
+        if (!fallback) {
+          return;
+        }
+        image.src = fallback;
+        const appMain = image.closest(".project-image.app-main");
+        if (appMain) {
+          appMain.classList.add("is-fallback");
+        }
+        image.classList.add("is-fallback");
+      }, { once: true });
+    });
+
+    const galleries = {};
+    const shotTriggers = Array.from(document.querySelectorAll(".project-shot-trigger"));
+    let activeGalleryName = "";
+    let activeShotIndex = 0;
+
+    shotTriggers.forEach((trigger) => {
+      const galleryName = trigger.dataset.gallery || "default";
+      const thumb = trigger.querySelector("img");
+      if (!thumb) {
+        return;
+      }
+
+      if (!galleries[galleryName]) {
+        galleries[galleryName] = [];
+      }
+
+      const shot = {
+        src: trigger.dataset.full || thumb.getAttribute("src") || "",
+        alt: thumb.getAttribute("alt") || ""
+      };
+
+      const shotIndex = galleries[galleryName].push(shot) - 1;
+      trigger.dataset.index = String(shotIndex);
+      trigger.addEventListener("click", () => {
+        openGallery(galleryName, shotIndex);
+      });
+    });
+
+    function renderGalleryShot() {
+      const gallery = galleries[activeGalleryName] || [];
+      if (!gallery.length || !galleryImage) {
+        return;
+      }
+
+      const shot = gallery[activeShotIndex];
+      galleryImage.src = shot.src;
+      galleryImage.alt = shot.alt || "Project shot";
+
+      if (galleryCaption) {
+        galleryCaption.textContent = shot.alt || "";
+      }
+
+      if (galleryCounter) {
+        galleryCounter.textContent = String(activeShotIndex + 1) + " / " + String(gallery.length);
+      }
+    }
+
+    function openGallery(galleryName, index) {
+      const gallery = galleries[galleryName] || [];
+      if (!gallery.length || !galleryModal) {
+        return;
+      }
+
+      activeGalleryName = galleryName;
+      activeShotIndex = index;
+      renderGalleryShot();
+      galleryModal.classList.add("open");
+      galleryModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeGallery() {
+      if (!galleryModal) {
+        return;
+      }
+      galleryModal.classList.remove("open");
+      galleryModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function moveGallery(step) {
+      const gallery = galleries[activeGalleryName] || [];
+      if (!gallery.length) {
+        return;
+      }
+
+      activeShotIndex = (activeShotIndex + step + gallery.length) % gallery.length;
+      renderGalleryShot();
+    }
+
+    if (galleryClose) {
+      galleryClose.addEventListener("click", closeGallery);
+    }
+
+    if (galleryPrev) {
+      galleryPrev.addEventListener("click", () => {
+        moveGallery(-1);
+      });
+    }
+
+    if (galleryNext) {
+      galleryNext.addEventListener("click", () => {
+        moveGallery(1);
+      });
+    }
+
+    if (galleryModal) {
+      galleryModal.addEventListener("click", (event) => {
+        if (event.target === galleryModal) {
+          closeGallery();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (!galleryModal || !galleryModal.classList.contains("open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeGallery();
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        moveGallery(-1);
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        moveGallery(1);
+      }
+    });
+
+    const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
+    const savedLang = localStorage.getItem(LANG_KEY) || "en-us";
+
+    setTheme(savedTheme);
+    applyTranslations(savedLang);
+
+    yearElement.textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
