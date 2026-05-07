@@ -941,8 +941,8 @@
 
       <div class="controls">
         <div class="lang-switch" role="group" aria-label="Language selector">
-          <button class="lang-btn active" data-lang="en-us" type="button">EN-US</button>
-          <button class="lang-btn" data-lang="pt-br" type="button">PT-BR</button>
+          <button class="lang-btn active" data-lang="pt-br" type="button">PT-BR</button>
+          <button class="lang-btn" data-lang="en-us" type="button">EN-US</button>
         </div>
         <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">
           <span data-i18n="modeLabel">Theme:</span>
@@ -968,7 +968,7 @@
             <a
               class="btn"
               id="heroResumeLink"
-              href="assets/Pedro_Lopes_CV.pdf"
+              href="assets/Pedro_Lopes_CV_EN_US.pdf"
               target="_blank"
               rel="noreferrer"
               data-i18n="ctaResume"
@@ -1607,7 +1607,7 @@
           <a href="mailto:pedrolopesgrc@gmail.com"><span data-i18n="contactEmailLabel">Email</span>: pedrolopesgrc@gmail.com</a>
           <a href="https://linkedin.com/in/pedro-lopes-324386161" target="_blank" rel="noreferrer"><span data-i18n="contactLinkedinLabel">LinkedIn</span></a>
           <a href="https://github.com/pedrolgarcia" target="_blank" rel="noreferrer"><span data-i18n="contactGithubLabel">GitHub</span></a>
-          <a id="contactResumeLink" href="assets/Pedro_Lopes_CV.pdf" target="_blank" rel="noreferrer" data-i18n="contactResumeLabel">Resume</a>
+          <a id="contactResumeLink" href="assets/Pedro_Lopes_CV_EN_US.pdf" target="_blank" rel="noreferrer" data-i18n="contactResumeLabel">Resume</a>
         </div>
 
         <div class="footer-note">
@@ -1918,14 +1918,14 @@
     const galleryPrev = document.getElementById("galleryPrev");
     const galleryNext = document.getElementById("galleryNext");
 
-    let currentLang = "en-us";
+    let currentLang = "pt-br";
     const resumeByLang = {
-      "en-us": "assets/Pedro_Lopes_CV.pdf",
-      "pt-br": "assets/Pedro_Lopes_CV_PTBR.pdf"
+      "pt-br": "assets/Pedro_Lopes_CV_PT_BR.pdf",
+      "en-us": "assets/Pedro_Lopes_CV_EN_US.pdf"
     };
 
     function updateThemeLabel() {
-      const dict = translations[currentLang] || translations["en-us"];
+      const dict = translations[currentLang] || translations["pt-br"];
       const isDark = root.getAttribute("data-theme") === "dark";
       themeState.textContent = isDark ? dict.modeDark : dict.modeLight;
       themeToggle.setAttribute("aria-label", (dict.modeLabel + " " + themeState.textContent).trim());
@@ -1940,7 +1940,7 @@
     }
 
     function applyTranslations(lang) {
-      currentLang = translations[lang] ? lang : "en-us";
+      currentLang = translations[lang] ? lang : "pt-br";
       const dict = translations[currentLang];
 
       document.documentElement.lang = currentLang === "pt-br" ? "pt-BR" : "en-US";
@@ -1965,7 +1965,7 @@
         terminalText.textContent = dict.terminalContent;
       }
 
-      const resumeHref = resumeByLang[currentLang] || resumeByLang["en-us"];
+      const resumeHref = resumeByLang[currentLang] || resumeByLang["pt-br"];
       if (heroResumeLink) {
         heroResumeLink.setAttribute("href", resumeHref);
       }
@@ -1992,7 +1992,7 @@
 
     languageButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        applyTranslations(button.dataset.lang || "en-us");
+        applyTranslations(button.dataset.lang || "pt-br");
       });
     });
 
@@ -2136,7 +2136,7 @@
     });
 
     const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
-    const savedLang = localStorage.getItem(LANG_KEY) || "en-us";
+    const savedLang = localStorage.getItem(LANG_KEY) || "pt-br";
 
     setTheme(savedTheme);
     applyTranslations(savedLang);
